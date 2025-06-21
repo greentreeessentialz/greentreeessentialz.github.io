@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Production build artifacts (for manual deployment)
+assets/
+index-*.js
+index-*.css

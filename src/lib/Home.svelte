@@ -1,8 +1,8 @@
-<h1>Welcome to My Psychic Readings</h1>
+<h1>🔥 HOT RELOAD WORKING! 🔥</h1>
 
 <p>
   Hello! I'm a spiritual guide offering personalized psychic readings and
-  handcrafted mystical items.
+  handcrafted mystical items. HOT RELOAD TEST 3
 </p>
 
 <div class="services">
@@ -18,7 +18,7 @@
 <div class="contact">
   <h2>Book a Reading</h2>
   <p>Ready to discover what the universe has in store for you?</p>
-  <button>Contact Me</button>
+  <button>Contact Me - HOT RELOAD TEST 2</button>
 </div>
 
 <style>
