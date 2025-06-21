@@ -1,4 +1,4 @@
-<h1>🔥 HOT RELOAD WORKING! 🔥</h1>
+<h1>🔥 HOT RELOAD WORKING! 🔥 - GitHub Actions Test</h1>
 
 <p>
   Hello! I'm a spiritual guide offering personalized psychic readings and
