@@ -14,7 +14,7 @@
     on:click={() => navigate("home")}
     class:active={currentPage === "home"}
   >
-    Home222
+    Home2221
   </button>
   <button
     on:click={() => navigate("about")}
