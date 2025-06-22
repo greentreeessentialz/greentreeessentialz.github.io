@@ -1,19 +1,17 @@
 <script>
-  import IntroBanner from "../assets/imgs/home-intro-banner.jpg";
-  import DemoBanner from "../assets/imgs/demo-banner.jpg";
 </script>
 
 <img
   class="intro-banner"
-  src={IntroBanner}
+  src="/imgs/home-intro-banner.jpg"
   alt="Green Tree Essentialz Logo"
   width="1080"
   height="360"
   srcset="
-  {IntroBanner} 1080w,
-  {IntroBanner} 768w,
-  {IntroBanner} 510w,
-  {IntroBanner} 300w
+  /imgs/home-intro-banner.jpg 1080w,
+  /imgs/home-intro-banner.jpg 768w,
+  /imgs/home-intro-banner.jpg 510w,
+  /imgs/home-intro-banner.jpg 300w
 "
   sizes="(max-width: 1080px) 100vw, 1080px"
   decoding="async"
@@ -99,15 +97,15 @@
 <section>
   <img
     class="demo-banner"
-    src={DemoBanner}
+    src="/imgs/demo-banner.jpg"
     alt="Green Tree Essentialz Logo"
     width="1080"
     height="360"
     srcset="
-    {DemoBanner} 1080w,
-    {DemoBanner} 768w,
-    {DemoBanner} 510w,
-    {DemoBanner} 300w
+    /imgs/demo-banner.jpg 1080w,
+    /imgs/demo-banner.jpg 768w,
+    /imgs/demo-banner.jpg 510w,
+    /imgs/demo-banner.jpg 300w
   "
     sizes="(max-width: 1080px) 100vw, 1080px"
     decoding="async"

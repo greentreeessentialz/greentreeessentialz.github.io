@@ -1,8 +1,6 @@
 <script>
   import Home from "./lib/Home.svelte";
   import About from "./lib/About.svelte";
-  import logoWebp from "./assets/imgs/greentree-logo.webp";
-  import logoPng from "./assets/imgs/greentree-logo.png";
 
   let currentPage = "home";
   let isMenuOpen = false;
@@ -62,28 +60,17 @@
   <div class="nav-left">
     <picture>
       <source
-        srcset="
-          {logoWebp} 1080w,
-          {logoWebp} 1024w,
-          {logoWebp} 768w,
-          {logoWebp} 510w,
-          {logoWebp} 300w
-        "
+        srcset="/imgs/greentree-logo.webp 1080w, /imgs/greentree-logo.webp 1024w, /imgs/greentree-logo.webp 768w, /imgs/greentree-logo.webp 510w, /imgs/greentree-logo.webp 300w"
         sizes="(max-width: 1080px) 100vw, 1080px"
         type="image/webp"
       />
       <img
-        src={logoPng}
+        src="/imgs/greentree-logo.png"
         alt="Green Tree Essentialz Logo"
         class="logo"
         width="1080"
         height="360"
-        srcset="
-          {logoPng} 1080w,
-          {logoPng} 768w,
-          {logoPng} 510w,
-          {logoPng} 300w
-        "
+        srcset="/imgs/greentree-logo.png 1080w, /imgs/greentree-logo.png 768w, /imgs/greentree-logo.png 510w, /imgs/greentree-logo.png 300w"
         sizes="(max-width: 1080px) 100vw, 1080px"
         decoding="async"
         fetchpriority="high"
