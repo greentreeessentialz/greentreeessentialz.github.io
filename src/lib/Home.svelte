@@ -114,6 +114,24 @@
   />
 </section>
 
+<img
+  class="demo-meta"
+  src="/imgs/demo-meta.jpg"
+  alt="Green Tree Essentialz Logo"
+  width="1080"
+  height="360"
+  srcset="
+    /imgs/demo-meta.jpg 1080w,
+    /imgs/demo-meta.jpg 768w,
+    /imgs/demo-meta.jpg 510w,
+    /imgs/demo-meta.jpg 300w
+  "
+  sizes="(max-width: 1080px) 100vw, 1080px"
+  decoding="async"
+  fetchpriority="high"
+  data-recalc-dims="1"
+/>
+
 <style>
   .intro-banner {
     width: 100%;
@@ -217,5 +235,13 @@
     object-fit: contain;
     display: block;
     margin: 0 auto;
+  }
+  .demo-meta {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    filter: brightness(40%);
   }
 </style>
