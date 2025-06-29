@@ -3,15 +3,15 @@
 
 <img
   class="intro-banner"
-  src="/imgs/home-intro-banner.jpg"
+  src="/imgs/landing-intro-banner.jpg"
   alt="Green Tree Essentialz Logo"
-  width="1080"
-  height="360"
+  width="6000"
+  height="2377"
   srcset="
-  /imgs/home-intro-banner.jpg 1080w,
-  /imgs/home-intro-banner.jpg 768w,
-  /imgs/home-intro-banner.jpg 510w,
-  /imgs/home-intro-banner.jpg 300w
+  /imgs/landing-intro-banner.jpg 1080w,
+  /imgs/landing-intro-banner.jpg 768w,
+  /imgs/landing-intro-banner.jpg 510w,
+  /imgs/landing-intro-banner.jpg 300w
 "
   sizes="(max-width: 1080px) 100vw, 1080px"
   decoding="async"

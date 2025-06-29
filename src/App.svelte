@@ -200,7 +200,7 @@
 
 <style>
   .top-row {
-    background: #5d4e37;
+    background-color: #53570e;
     color: #f7f4f0;
     font-size: 12px;
     height: 32px;
@@ -259,7 +259,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e9efc7;
+    background-color: #feffb7;
   }
 
   .nav-left {
@@ -311,7 +311,7 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #5d4e37;
+    color: #53570e;
   }
 
   button {
@@ -353,7 +353,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #5d4e37;
+    background: #53570e;
     z-index: 999;
     transform: translateY(-100%);
     transition: transform 0.3s ease;
@@ -431,6 +431,7 @@
 
   .mobile-contact p {
     color: #f7f4f0;
+    padding: 0.5rem 0;
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -478,7 +479,7 @@
 
     .contact-info span {
       display: flex;
-      align-items: center;
+      /* align-items: center; */
       justify-content: center;
     }
 
