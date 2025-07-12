@@ -1,247 +1,312 @@
 <script>
+  import { onMount } from "svelte";
+
+  let titleVisible = false;
+
+  onMount(() => {
+    // Trigger title animation after a short delay
+    setTimeout(() => {
+      titleVisible = true;
+    }, 300);
+  });
 </script>
 
-<img
-  class="intro-banner"
-  src="/imgs/landing-intro-banner.jpg"
-  alt="Green Tree Essentialz Logo"
-  width="6000"
-  height="2377"
-  srcset="
-  /imgs/landing-intro-banner.jpg 1080w,
-  /imgs/landing-intro-banner.jpg 768w,
-  /imgs/landing-intro-banner.jpg 510w,
-  /imgs/landing-intro-banner.jpg 300w
-"
-  sizes="(max-width: 1080px) 100vw, 1080px"
-  decoding="async"
-  fetchpriority="high"
-  data-recalc-dims="1"
-/>
+<!-- Hero Section with Parallax Background -->
+<section class="hero-section">
+  <div class="parallax-background"></div>
 
-<section class="temp-section">
-  <h1>Rejuvenate from the outside in!</h1>
-  <div class="elementor-row">
-    <div class="elementor-block">
-      <div class="circle-img-wrap">
-        <div class="circle-bg"></div>
+  <!-- Header Content -->
+  <div class="header-content">
+    <h1 class="hero-title" class:visible={titleVisible}>
+      Rejuvenate from the outside in!
+    </h1>
+  </div>
+</section>
+
+<section class="landing-about-section">
+  <!-- Hint Block - positioned with negative margin to overlap with hero section -->
+  <div class="hint-block">
+    <div class="hint-content">
+      <div class="hint-left">
+        <h2>Full Service Natural Healing Center</h2>
+        <p>
+          At Green Tree Essentialz we are a full service Natural Healing Center
+          with full protocols and plenty of support to help you meet your goals.
+        </p>
+        <p>
+          Our store currently offers: New Age and Metaphysical Items, Essential
+          Oils, incense, candles, burners, Stones and crystals, books,
+          pendulums, Tarot and Oracle Cards, etc!
+        </p>
+        <a href="/about" class="hint-about-us-link">
+          Behind the Healing <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="hint-right">
         <img
-          decoding="async"
-          width="auto"
-          height="150"
-          src="https://awakenedtemplates.com/sion/wp-content/uploads/sites/18/2024/08/flowers-03.png"
-          class="attachment-large size-large wp-image-22"
-          alt=""
+          src="/imgs/hint-banner.jpg"
+          alt="Wellness Services"
+          class="hint-image"
         />
       </div>
-      <h3 class="elementor-heading-title elementor-size-default">
-        Spiritual Healing
-      </h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="elementor-block">
-      <div class="circle-img-wrap">
-        <div class="circle-bg"></div>
-        <img
-          loading="lazy"
-          decoding="async"
-          width="auto"
-          height="150"
-          src="https://awakenedtemplates.com/sion/wp-content/uploads/sites/18/2024/08/flowers-04.png"
-          class="attachment-large size-large wp-image-23"
-          alt=""
-        />
-      </div>
-      <h3 class="elementor-heading-title elementor-size-default">
-        Psychic Reading
-      </h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="elementor-block">
-      <div class="circle-img-wrap">
-        <div class="circle-bg"></div>
-        <img
-          loading="lazy"
-          decoding="async"
-          width="auto"
-          height="150"
-          src="https://awakenedtemplates.com/sion/wp-content/uploads/sites/18/2024/08/flowers-05.png"
-          class="attachment-large size-large wp-image-24"
-          alt=""
-        />
-      </div>
-      <h3 class="elementor-heading-title elementor-size-default">
-        Spirit Release
-      </h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="elementor-block">
-      <div class="circle-img-wrap">
-        <div class="circle-bg"></div>
-        <img
-          loading="lazy"
-          decoding="async"
-          width="auto"
-          height="150"
-          src="https://awakenedtemplates.com/sion/wp-content/uploads/sites/18/2024/08/flowers-06.png"
-          class="attachment-large size-large wp-image-25"
-          alt=""
-        />
-      </div>
-      <h3 class="elementor-heading-title elementor-size-default">Cleansing</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
   </div>
 </section>
 
-<section>
-  <img
-    class="demo-banner"
-    src="/imgs/demo-banner.jpg"
-    alt="Green Tree Essentialz Logo"
-    width="1080"
-    height="360"
-    srcset="
-    /imgs/demo-banner.jpg 1080w,
-    /imgs/demo-banner.jpg 768w,
-    /imgs/demo-banner.jpg 510w,
-    /imgs/demo-banner.jpg 300w
-  "
-    sizes="(max-width: 1080px) 100vw, 1080px"
-    decoding="async"
-    fetchpriority="high"
-    data-recalc-dims="1"
-  />
-</section>
-
-<img
-  class="demo-meta"
-  src="/imgs/demo-meta.jpg"
-  alt="Green Tree Essentialz Logo"
-  width="1080"
-  height="360"
-  srcset="
-    /imgs/demo-meta.jpg 1080w,
-    /imgs/demo-meta.jpg 768w,
-    /imgs/demo-meta.jpg 510w,
-    /imgs/demo-meta.jpg 300w
-  "
-  sizes="(max-width: 1080px) 100vw, 1080px"
-  decoding="async"
-  fetchpriority="high"
-  data-recalc-dims="1"
-/>
-
 <style>
-  .intro-banner {
+  /* Hero Section Styles */
+  .hero-section {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+    margin-top: -179px; /* Negative margin to pull up behind nav */
+  }
+
+  .parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-image: url("/imgs/landing-intro-banner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Creates parallax effect */
+    z-index: 1;
+  }
+
+  .header-content {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 250px; /* 250px below nav */
+  }
+
+  .hero-title {
+    font-family: "DM Serif Display";
+    font-size: clamp(
+      2rem,
+      6vw,
+      6.5rem
+    ); /* Reduced from 8vw to 6vw for better fit */
+    font-weight: 400;
+    margin: 0 auto;
+    line-height: 1.1;
+    white-space: nowrap; /* Prevent line breaks */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: #fff5b6;
+    text-align: center;
+    width: 100%;
+    max-width: calc(100% - 5rem); /* Match nav margins (2.5rem on each side) */
+    overflow: visible; /* Ensure text is not clipped */
+  }
+
+  .hero-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive adjustments for hero */
+  @media (max-width: 1130px) {
+    .header-content {
+      padding-top: 200px; /* Reduced padding for tablet sizes */
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-section {
+      height: 100vh; /* Keep full viewport height on mobile */
+      margin-top: -150px; /* Slightly less negative margin on mobile */
+    }
+
+    .parallax-background {
+      background-attachment: scroll; /* Disable parallax on mobile for better performance */
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .hero-title {
+      max-width: calc(100% - 2rem); /* Smaller margins on mobile */
+      font-size: clamp(1.5rem, 4vw, 3.5rem); /* Reduced scaling for mobile */
+    }
+  }
+
+  @media (max-width: 600px) {
+    .header-content {
+      padding-top: 175px; /* Further reduced padding for phones */
+    }
+
+    .hero-title {
+      max-width: calc(100% - 1rem); /* Even smaller margins on small mobile */
+      font-size: 2rem; /* Fixed font size for mobile */
+      white-space: normal; /* Allow text to wrap */
+      line-height: 1.2; /* Better line height for wrapped text */
+    }
+  }
+
+  .hint-block {
+    position: relative;
+    margin-top: -100px; /* Negative margin to overlap with hero section */
+    z-index: 10;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hint-content {
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    max-width: 1024px;
+    width: calc(100% - 5rem); /* Match nav margins */
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .hint-content h2 {
+    font-size: 1.75rem;
+    font-family: "DM Serif Display";
+    color: #53570e;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .hint-left {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hint-left p {
+    color: #53570e;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .hint-about-us-link {
+    background-color: #53570e;
+    color: #fff5b6;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 0.5rem; /* Space between text and arrow */
+  }
+
+  .hint-about-us-link:hover {
+    background-color: #6b7112;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(83, 87, 14, 0.3);
+  }
+
+  .hint-about-us-link i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+  }
+
+  .hint-about-us-link:hover i {
+    transform: translateX(3px);
+  }
+
+  .hint-right {
+    flex-shrink: 0;
+  }
+
+  .hint-image {
+    width: 100%;
+    max-width: 470px;
     height: auto;
+    border-radius: 0.75rem; /* 12px converted to rem */
+    object-fit: cover;
   }
-  .temp-section {
-    width: 100%;
-    padding: 60px;
-    background-color: #181908;
+
+  @media (max-width: 1130px) {
+    .hint-content h2 {
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+    .hint-left p {
+      font-size: 1rem;
+    }
   }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hint-block {
+      margin-top: -80px;
+    }
+
+    .hint-content {
+      width: calc(100% - 2rem);
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hint-left p {
+      font-size: 1rem;
+    }
+
+    .hint-image {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hint-block {
+      margin-top: -60px;
+    }
+
+    .hint-content {
+      width: calc(100% - 1rem);
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .hint-left p {
+      font-size: 0.9rem;
+    }
+  }
+
   h1 {
     font-family: "DM Serif Display";
     text-align: center;
     font-size: 52px;
     font-weight: 400;
-    color: #f7f4f0;
+    color: #fff5b6;
   }
-  h3 {
-    font-family: "DM Serif Display";
-    font-size: 27px;
-    font-weight: 400;
-    color: #f7f4f0;
-  }
-  p {
-    color: #f7f4f0;
-    font-size: 17px;
-  }
-  section {
-    background-color: #f7f4f0;
-    padding: 80px;
-  }
-  .demo-banner {
-    max-width: 1300;
-    width: 100%;
-    height: 400;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  .elementor-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 32px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
-  .elementor-block {
-    width: 240px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background: none;
-  }
-  .elementor-block img {
-    display: block;
-    margin: 0 auto 16px auto;
-    max-width: 100%;
-    height: 200px;
-    width: auto;
-    object-fit: contain;
-  }
-  .elementor-block h3 {
-    margin: 0 0 16px 0;
-    font-family: "DM Serif Display";
-    font-size: 27px;
-    font-weight: 400;
-    color: #f7f4f0;
-  }
-  .elementor-block p {
-    margin: 0;
-    color: #f7f4f0;
-    font-size: 17px;
-  }
-  .circle-img-wrap {
-    position: relative;
-    width: 124px;
-    height: 150px;
-    margin: 0 auto 16px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .circle-bg {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 124px;
-    height: 124px;
-    background: #e9efc7;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-  .circle-img-wrap img {
-    position: relative;
-    z-index: 2;
-    height: 150px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-  }
-  .demo-meta {
-    display: block;
-    max-width: 100%;
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    filter: brightness(40%);
+  .landing-about-section {
+    background-color: #fff5b6;
   }
 </style>
