@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   // import LandingNaturalSection from "./components/LandingNaturalSection.svelte";
+  import LandingNaturalSection from "./components/LandingNaturalSection.svelte";
 
   let titleVisible = false;
 
@@ -54,7 +55,7 @@
   </div>
 </section>
 
-<!-- <LandingNaturalSection /> -->
+<LandingNaturalSection />
 
 <section class="landing-spiritual-services-section">
   <h3>Spiritual Services</h3>
