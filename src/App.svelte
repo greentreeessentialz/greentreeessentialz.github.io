@@ -1,7 +1,7 @@
 <script>
   import Home from "./lib/Home.svelte";
   import About from "./lib/About.svelte";
-  import LandingNav from "./components/LandingNav.svelte";
+  import LandingNav from "./lib/components/LandingNav.svelte";
   import { onMount } from "svelte";
 
   let currentPage = "home";
