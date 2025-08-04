@@ -134,7 +134,6 @@
 <style>
   .landing-natural-health-services-section {
     width: 100%;
-    min-height: 700px;
     background-color: #fff5b6;
     position: relative;
     overflow: hidden;
@@ -156,7 +155,7 @@
   .landing-natural-health-flex {
     max-width: 1200px;
     width: 100%;
-    margin: 2rem auto;
+    margin: 5rem auto 25rem auto;
     padding: 0 2.5rem;
     box-sizing: border-box;
     position: relative;
@@ -218,8 +217,15 @@
     .nh-row-2 > .service-card:nth-child(3) {
       flex: 1;
     }
+    .landing-natural-health-flex {
+      margin: 2rem auto;
+    }
   }
-
+  @media (max-width: 500px) {
+    .landing-natural-health-flex {
+      padding: 0 1rem;
+    }
+  }
   .service-card {
     background: #fff;
     border-radius: 1.25rem;
@@ -266,7 +272,7 @@
     right: 0;
     bottom: 0;
     height: 0;
-    background: rgba(83, 87, 14, 0.92);
+    background: rgb(83, 87, 14);
     color: #fff5b6;
     display: flex;
     align-items: center;

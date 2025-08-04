@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  // import LandingNaturalSection from "./components/LandingNaturalSection.svelte";
   import LandingNaturalSection from "./components/LandingNaturalSection.svelte";
+  import LandingSpiritualSection from "./components/LandingSpiritualSection.svelte";
+  import LandingIntuitiveReadingSection from "./components/LandingIntuitiveReadingSection.svelte";
 
   let titleVisible = false;
 
@@ -57,9 +58,9 @@
 
 <LandingNaturalSection />
 
-<section class="landing-spiritual-services-section">
-  <h3>Spiritual Services</h3>
-</section>
+<LandingSpiritualSection />
+
+<LandingIntuitiveReadingSection />
 
 <style>
   /* Hero Section Styles */
@@ -316,33 +317,5 @@
   .landing-about-section {
     background-color: #fff5b6;
     padding-bottom: 3rem;
-  }
-  .landing-natural-health-services-section {
-    width: 100%;
-    height: 700px;
-    border-top: 5px dashed black;
-    background-color: #fff5b6;
-  }
-  .landing-natural-health-services-section h3 {
-    font-family: "DM Serif Display";
-    text-align: center;
-    font-size: 52px;
-    font-weight: 400;
-    line-height: normal;
-    color: #53570e;
-  }
-  .landing-spiritual-services-section {
-    width: 100%;
-    height: 700px;
-    border-top: 5px dashed black;
-    background-color: #53570e;
-  }
-  .landing-spiritual-services-section h3 {
-    font-family: "DM Serif Display";
-    text-align: center;
-    font-size: 52px;
-    font-weight: 400;
-    line-height: normal;
-    color: #fff5b6;
   }
 </style>
