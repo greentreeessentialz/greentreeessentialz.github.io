@@ -3,6 +3,7 @@
   import LandingNaturalSection from "./components/LandingNaturalSection.svelte";
   import LandingSpiritualSection from "./components/LandingSpiritualSection.svelte";
   import LandingIntuitiveReadingSection from "./components/LandingIntuitiveReadingSection.svelte";
+  import LandingPricingInfoSection from "./components/LandingPricingInfoSection.svelte";
 
   let titleVisible = false;
 
@@ -61,6 +62,8 @@
 <LandingSpiritualSection />
 
 <LandingIntuitiveReadingSection />
+
+<LandingPricingInfoSection />
 
 <style>
   /* Hero Section Styles */

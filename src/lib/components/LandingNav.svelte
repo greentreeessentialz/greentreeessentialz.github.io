@@ -9,6 +9,40 @@
     event.preventDefault();
     navigate(page);
   }
+
+  // Smooth scroll function with easing
+  function smoothScrollToSection(sectionId, closeMenu = false) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Close mobile menu if open
+      if (closeMenu && isMenuOpen) {
+        toggleMenu();
+      }
+
+      // Get the section's position relative to the viewport
+      const rect = section.getBoundingClientRect();
+      const currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // Calculate the target scroll position to align section top with screen top
+      // rect.top is the distance from section top to viewport top
+      // currentScrollTop is the current scroll position
+      // We want section top to be at viewport top (0), so we add currentScrollTop + rect.top
+      const targetPosition = currentScrollTop + rect.top;
+
+      // Smooth scroll with easing
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    }
+  }
+
+  // Handle service navigation clicks
+  function handleServiceClick(event, sectionId, closeMenu = false) {
+    event.preventDefault();
+    smoothScrollToSection(sectionId, closeMenu);
+  }
 </script>
 
 <div>
@@ -75,13 +109,17 @@
     <div class="nav-center">
       <ul class="desktop-menu">
         <li>
-          <a href="http://greentreeessentialz.com/index.php/spiritual-services/"
+          <a
+            href="#spiritual-services-section"
+            on:click={(e) =>
+              handleServiceClick(e, "spiritual-services-section")}
             >Spiritual Services</a
           >
         </li>
         <li>
           <a
-            href="http://greentreeessentialz.com/index.php/natural-health-services/"
+            href="#health-services-section"
+            on:click={(e) => handleServiceClick(e, "health-services-section")}
             >Natural Health Services</a
           >
         </li>
@@ -157,13 +195,17 @@
         <ul>
           <li>
             <a
-              href="http://greentreeessentialz.com/index.php/spiritual-services/"
+              href="#spiritual-services-section"
+              on:click={(e) =>
+                handleServiceClick(e, "spiritual-services-section", true)}
               >Spiritual Services</a
             >
           </li>
           <li>
             <a
-              href="http://greentreeessentialz.com/index.php/natural-health-services/"
+              href="#health-services-section"
+              on:click={(e) =>
+                handleServiceClick(e, "health-services-section", true)}
               >Natural Health Services</a
             >
           </li>
@@ -198,6 +240,18 @@
 </div>
 
 <style>
+  /* Smooth scrolling for the entire page */
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scroll behavior with better easing */
+  :global(body) {
+    scroll-behavior: smooth;
+  }
+
+  /* Remove manual scroll positioning - now handled dynamically in JavaScript */
+
   .top-nav {
     background-color: #53570e;
     color: #f7f4f0;
@@ -246,12 +300,6 @@
     margin: 0;
   }
 
-  .top-nav button.active {
-    text-decoration: underline;
-    font-weight: bold;
-    color: #f7f4f0;
-  }
-
   .global-app-nav {
     margin-top: 1.5rem;
     margin-left: 2.5rem;
@@ -297,10 +345,29 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
   }
 
   .desktop-menu a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #53570e;
+    transform: translateY(-2px);
+  }
+
+  .desktop-menu a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #53570e;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .desktop-menu a:hover::after {
+    width: 100%;
   }
 
   .logo {
@@ -414,7 +481,6 @@
     text-align: left;
   }
 
-  .mobile-menu-section button,
   .mobile-menu-section a {
     color: #f7f4f0;
     text-decoration: none;
@@ -422,18 +488,30 @@
     font-weight: 500;
     display: block;
     padding: 0.5rem 0;
-    transition: color 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-align: left;
     background: none;
     border: none;
     cursor: pointer;
     width: 100%;
+    position: relative;
   }
 
-  .mobile-menu-section button:hover,
   .mobile-menu-section a:hover {
-    color: #ddd;
+    color: #fff5b6;
+    transform: translateX(8px);
   }
+
+  /* Remove special styling for service links - they should look the same as other links */
+  /* .mobile-menu-section a[href^="#"] {
+    font-weight: 600;
+    color: #fff5b6;
+  }
+
+  .mobile-menu-section a[href^="#"]:hover {
+    color: #fff;
+    transform: translateX(8px);
+  } */
 
   .mobile-contact p {
     color: #f7f4f0;

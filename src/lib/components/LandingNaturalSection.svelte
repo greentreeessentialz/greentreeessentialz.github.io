@@ -1,34 +1,62 @@
 <script>
+  import LandingInfoModal from "./LandingInfoModal.svelte";
+
   const services = [
     {
-      icon: "fa-stethoscope",
       title: "Health Consultations",
       desc: `Start your healing from the inside out with this Homeopathic Holistic approach to health care. Getting a Natural Health Screen will give you the information and tools you need to heal your own body with a more all natural pathway than what Modern Medicine is used to in today's Healthcare.`,
+      fullDesc: `Start your healing from the inside out with this Homeopathic Holistic approach to health care. Getting a Natural Health Screen will give you the information and tools you need to heal your own body with a more all natural pathway than what Modern Medicine is used to in today's Healthcare. Natural Health Screen cost is $65`,
     },
     {
-      icon: "fa-tint",
       title: "Raindrop",
       desc: `Rain Drop Therapy is a therapeutic topical application of essential oils. It stimulates all of the body systems on a physical and emotional level. The benefits of Rain Drop Therapy include pain reduction, stress relief, muscle relaxation and much more!`,
+      fullDesc: `Rain Drop Therapy is a therapeutic topical application of essential oils. It stimulates all of the body systems on a physical and emotional level. The benefits of Rain Drop Therapy include pain reduction, stress relief, muscle relaxation, reduces inflammation, helps improve circulation, helps to detox the body systems and improves immune function. • Pain Relief
+• Improved Circulation
+• Stress and Anxiety Reduction
+• Enhanced Immune System
+• Improved Sleep
+• Increased Energy Levels • Emotional Release
+• Reduced Muscle Stiffness and Inflammation
+• Good Detoxification Method. 
+Rain Drop Treatment cost is $65`,
     },
     {
-      icon: "fa-shoe-prints",
       title: "Reflexology",
       desc: `Reflexology is not a foot massage by any means. We have over 7,000 nerve endings in our feet and approximately 1300 or so in our hands. Each nerve corresponds to a particular area of the body. Using acupressure, high quality/organic oils and certain techniques to stimulate these nerve endings, we tell what area of your body that may be giving you some challenges and will help alleviate it for you.`,
+      fullDesc: `Reflexology is not a foot massage by any means. We have over 7,000 nerve endings in our feet and approximately 1300 or so in our hands. Each nerve corresponds to a particular area of the body. Using acupressure, high quality/organic oils and certain techniques to stimulate these nerve endings, we tell what area of your body that may be giving you some challenges and will help alleviate it for you. There are MANY benefits for using Reflexology, but the top two are almost instantaneous STRESS reduction and PAIN RELIEF.`,
     },
     {
-      icon: "fa-baby",
       title: "Prenatal Massage",
       desc: `At Green Tree Essentialz, we're honored to walk beside you through the sacred journey of motherhood-offering gentle, nurturing support from the second trimester through postpartum recovery. Our prenatal and postnatal massage services are designed to soothe your body, calm your mind, and help you feel held every step of the way.`,
+      fullDesc: `At Green Tree Essentialz, we're honored to walk beside you through the sacred journey of motherhood-offering gentle, nurturing support from the second trimester through postpartum recovery. Our prenatal and postnatal massage services are designed to soothe your body, calm your mind, and help you feel held every step of the way. Whether you're easing into the changes of pregnancy, preparing for birth, or finding your footing after baby arrives, our experienced, certified therapists are here with loving hands and open hearts. We can even be present during labor or teach your birth coach supportive techniques to bring comfort and connection in those powerful moments. You don't have to walk this path alone-let us be part of your village, with care that's kind, intuitive, and full of grace.`,
     },
     {
-      icon: "fa-water",
       title: "Lymphatic Massage",
-      desc: `If you've recently had cosmetic body surgery - whether it's a tummy tuck, liposuction, BBL, or another body contouring procedure- your body is working hard to heal, release fluid, and rebalance itself. That's where our gentle and supportive lymphatic massage comes in.`,
+      desc: `If you've recently had cosmetic body surgery - whether it's a tummy tuck, liposuction, BBL, or another body contouring procedure - your body is working hard to heal, release fluid, and rebalance itself. That's where our gentle and supportive lymphatic massage comes in.`,
+      fullDesc: `If you've recently had cosmetic body surgery - whether it's a tummy tuck, liposuction, BBL, or another body contouring procedure - your body is working hard to heal, release fluid, and rebalance itself. That's where our gentle and supportive lymphatic massage comes in. At Green Tree Essentialz, we offer a healing experience that is the opposite of harsh or clinical. We take our time. We nurture. We understand the sensitivity and vulnerability that can follow surgery, and we meet it with warmth, compassion, and skill. Our approach is soft and effective - we never rush or use aggressive techniques. Instead, we combine gentle manual lymphatic drainage with soothing heat, calming touch, and personalized attention to help reduce swelling, support your recovery, and ease discomfort. You are never just another appointment here. You are seen, supported, and cared for like family. If you're looking for a safe, sacred space to rest, recover, and feel whole again, our door is open. Let us walk beside you on your healing journey - your body deserves it, and so do you.`,
     },
   ];
+
+  // Modal state
+  let isModalOpen = false;
+  let modalTitle = "";
+  let modalDescription = "";
+
+  function openModal(title, description) {
+    modalTitle = title;
+    modalDescription = description;
+    isModalOpen = true;
+  }
+
+  function closeModal() {
+    isModalOpen = false;
+  }
 </script>
 
-<section class="landing-natural-health-services-section">
+<section
+  id="health-services-section"
+  class="landing-natural-health-services-section"
+>
   <div class="mandala-bg">
     <img src="/imgs/natural-health-mandala.png" alt="Mandala" />
   </div>
@@ -48,9 +76,12 @@
         </div>
         <p>{services[0].desc}</p>
         <div class="service-hover-panel">
-          <a href="/natural-services" class="learn-more-link"
-            >Learn more <i class="fas fa-arrow-right"></i></a
+          <button
+            class="learn-more-button"
+            on:click={() => openModal(services[0].title, services[0].fullDesc)}
           >
+            Learn more <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
       <div class="service-card">
@@ -66,9 +97,12 @@
         </div>
         <p>{services[1].desc}</p>
         <div class="service-hover-panel">
-          <a href="/natural-services" class="learn-more-link"
-            >Learn more <i class="fas fa-arrow-right"></i></a
+          <button
+            class="learn-more-button"
+            on:click={() => openModal(services[1].title, services[1].fullDesc)}
           >
+            Learn more <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -86,9 +120,12 @@
         </div>
         <p>{services[2].desc}</p>
         <div class="service-hover-panel">
-          <a href="/natural-services" class="learn-more-link"
-            >Learn more <i class="fas fa-arrow-right"></i></a
+          <button
+            class="learn-more-button"
+            on:click={() => openModal(services[2].title, services[2].fullDesc)}
           >
+            Learn more <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
       <div class="service-card">
@@ -104,9 +141,12 @@
         </div>
         <p>{services[3].desc}</p>
         <div class="service-hover-panel">
-          <a href="/natural-services" class="learn-more-link"
-            >Learn more <i class="fas fa-arrow-right"></i></a
+          <button
+            class="learn-more-button"
+            on:click={() => openModal(services[3].title, services[3].fullDesc)}
           >
+            Learn more <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
       <div class="service-card">
@@ -122,14 +162,25 @@
         </div>
         <p>{services[4].desc}</p>
         <div class="service-hover-panel">
-          <a href="/natural-services" class="learn-more-link"
-            >Learn more <i class="fas fa-arrow-right"></i></a
+          <button
+            class="learn-more-button"
+            on:click={() => openModal(services[4].title, services[4].fullDesc)}
           >
+            Learn more <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Modal component -->
+<LandingInfoModal
+  isOpen={isModalOpen}
+  title={modalTitle}
+  description={modalDescription}
+  onClose={closeModal}
+/>
 
 <style>
   .landing-natural-health-services-section {
@@ -155,7 +206,7 @@
   .landing-natural-health-flex {
     max-width: 1200px;
     width: 100%;
-    margin: 5rem auto 25rem auto;
+    margin: 5rem auto 21rem auto;
     padding: 0 2.5rem;
     box-sizing: border-box;
     position: relative;
@@ -291,7 +342,7 @@
     pointer-events: auto;
   }
 
-  .learn-more-link {
+  .learn-more-button {
     color: #fff5b6;
     font-weight: 600;
     text-decoration: none;
@@ -300,9 +351,13 @@
     align-items: center;
     gap: 0.5rem;
     transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
   }
 
-  .learn-more-link:hover {
+  .learn-more-button:hover {
     color: #fff;
   }
 
