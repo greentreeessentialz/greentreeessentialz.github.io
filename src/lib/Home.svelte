@@ -65,6 +65,8 @@
 
 <LandingPricingInfoSection />
 
+<LandingIntuitiveReadingSection />
+
 <style>
   /* Hero Section Styles */
   .hero-section {

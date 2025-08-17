@@ -35,7 +35,6 @@
 
   // Handle modal open/close transitions
   $: if (isOpen) {
-    console.log("Modal should open, isOpen:", isOpen);
     // Remove hidden classes to show modal
     setTimeout(() => {
       if (modalElement && overlayElement) {
@@ -45,7 +44,6 @@
       }
     }, 10);
   } else {
-    console.log("Modal should close, isOpen:", isOpen);
     // Add hidden classes to hide modal
     if (modalElement && overlayElement) {
       modalElement.classList.add("hidden");
