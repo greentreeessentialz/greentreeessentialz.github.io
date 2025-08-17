@@ -20,6 +20,11 @@ export default defineConfig({
         assetFileNames: `assets/[name].[hash].[ext]`,
       },
     },
+    target: "esnext",
+    modulePreload: false,
   },
-  base: "./",
+  base: "/",
+  optimizeDeps: {
+    include: ["svelte"],
+  },
 });
