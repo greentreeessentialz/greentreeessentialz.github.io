@@ -58,12 +58,10 @@
 </script>
 
 <div class="global-app-container">
-  {#if currentPage === "home"}
-    <!-- Navigation positioned on top with high z-index -->
-    <div class="nav-wrapper">
-      <LandingNav {currentPage} {isMenuOpen} {navigate} {toggleMenu} />
-    </div>
-  {/if}
+  <!-- Navigation positioned on top with high z-index -->
+  <div class="nav-wrapper">
+    <LandingNav {currentPage} {isMenuOpen} {navigate} {toggleMenu} />
+  </div>
 
   <main>
     {#if currentPage === "home"}
