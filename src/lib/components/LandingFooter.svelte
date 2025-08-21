@@ -128,7 +128,7 @@
     height: 450px;
     margin: 0 auto;
     padding: 2rem;
-    background: rgba(236, 236, 236, 0.2);
+    background: #fff5b655;
     border-radius: 16px;
     backdrop-filter: blur(5px);
     display: flex;
