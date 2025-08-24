@@ -1,3 +1,19 @@
+<script>
+  // Smooth scroll function for service links
+  function handleServiceClick(event) {
+    const href = event.currentTarget.getAttribute("href");
+    const sectionId = href.substring(1); // Remove the # symbol
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }
+</script>
+
 <footer class="footer-section">
   <div class="footer-background">
     <img src="/imgs/footer.jpg" alt="tree under rainbow" />
@@ -18,13 +34,25 @@
           support to help you meet your wellness goals.
         </p>
         <div class="social-links">
-          <a href="#" aria-label="Facebook" class="social-link">
+          <a
+            href="https://www.facebook.com/GreenTreeEssentialz"
+            aria-label="Facebook"
+            class="social-link"
+          >
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="#" aria-label="Instagram" class="social-link">
+          <a
+            href="https://www.instagram.com/greentreeessentialz"
+            aria-label="Instagram"
+            class="social-link"
+          >
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="#" aria-label="Email" class="social-link">
+          <a
+            href="mailto:GreenTreeEssentialz@gmail.com"
+            aria-label="Email"
+            class="social-link"
+          >
             <i class="fas fa-envelope"></i>
           </a>
         </div>
@@ -53,12 +81,31 @@
       <div class="footer-column">
         <h3>Our Services</h3>
         <ul class="footer-links">
-          <li><a href="#spiritual-services-section">Spiritual Services</a></li>
           <li>
-            <a href="#health-services-section">Natural Health Services</a>
+            <a
+              href="#spiritual-services-section"
+              on:click|preventDefault={handleServiceClick}>Spiritual Services</a
+            >
           </li>
-          <li><a href="#intuitive-reading-section">Intuitive Readings</a></li>
-          <li><a href="#pricing-section">Pricing & Packages</a></li>
+          <li>
+            <a
+              href="#health-services-section"
+              on:click|preventDefault={handleServiceClick}
+              >Natural Health Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="#intuitive-reading-section"
+              on:click|preventDefault={handleServiceClick}>Intuitive Readings</a
+            >
+          </li>
+          <li>
+            <a
+              href="#pricing-info-section"
+              on:click|preventDefault={handleServiceClick}>Pricing & Packages</a
+            >
+          </li>
         </ul>
       </div>
 
@@ -89,7 +136,7 @@
 
     <!-- Bottom Bar -->
     <div class="footer-bottom">
-      <p>&copy; 2024 Green Tree Essentialz. All rights reserved.</p>
+      <p>&copy; 2025 Green Tree Essentialz. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -126,7 +173,7 @@
     width: 100%;
     max-width: 1200px;
     height: 450px;
-    margin: 0 auto;
+    margin: 0 1.5rem;
     padding: 2rem;
     background: #fff5b655;
     border-radius: 16px;
@@ -163,7 +210,7 @@
   }
 
   .footer-logo img {
-    height: 60px;
+    height: 70px;
     width: auto;
     margin-bottom: 1rem;
   }
@@ -172,7 +219,7 @@
     color: #333;
     line-height: 1.5;
     margin-bottom: 1rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .social-links {
@@ -211,8 +258,9 @@
   .footer-links a {
     color: #333;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     transition: color 0.2s ease;
+    cursor: pointer;
   }
 
   .footer-links a:hover {
@@ -230,13 +278,14 @@
     align-items: flex-start;
     gap: 0.5rem;
     color: #333;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .contact-item i {
     color: #53570e;
     margin-top: 0.2rem;
     min-width: 14px;
+    flex-shrink: 0;
   }
 
   .addresses {
@@ -277,23 +326,30 @@
     .footer-content {
       height: 500px;
       padding: 1.5rem;
+      margin: 0;
+      border-radius: 0;
+      width: 100%;
     }
   }
 
   @media (max-width: 768px) {
     .footer-section {
-      height: 600px;
+      height: auto;
+      min-height: 600px;
     }
 
     .footer-content {
-      height: 450px;
+      height: auto;
+      min-height: 450px;
       padding: 1.5rem;
-      margin: 0 1rem;
+      margin: 0;
+      border-radius: 0;
     }
 
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .footer-column h3 {
@@ -308,10 +364,8 @@
 
     .footer-logo {
       text-align: center;
-    }
-
-    .footer-logo img {
-      height: 50px;
+      display: flex;
+      justify-content: center;
     }
 
     .company-description {
@@ -345,21 +399,31 @@
 
   @media (max-width: 480px) {
     .footer-section {
-      height: 550px;
+      height: auto;
+      min-height: 550px;
     }
 
     .footer-content {
-      height: 400px;
+      height: auto;
+      min-height: 400px;
       padding: 1rem;
-      margin: 0 0.5rem;
+      margin: 0;
+      border-radius: 0;
     }
 
     .footer-grid {
       gap: 1rem;
+      margin-bottom: 1rem;
     }
 
     .footer-column h3 {
       font-size: 0.95rem;
+    }
+
+    .footer-logo {
+      text-align: center;
+      display: flex;
+      justify-content: center;
     }
 
     .footer-logo img {

@@ -124,7 +124,8 @@
           >
         </li>
         <li>
-          <a href="http://greentreeessentialz.com/index.php/events-classes/"
+          <a
+            href="https://www.facebook.com/pg/GreenTreeEssentialz/events/?ref=page_internal"
             >Events & Classes</a
           >
         </li>

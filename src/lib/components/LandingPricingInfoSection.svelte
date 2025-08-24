@@ -33,22 +33,26 @@
   });
 </script>
 
-<section class="pricing-section" bind:this={pricingSection}>
+<section
+  id="pricing-info-section"
+  class="pricing-section"
+  bind:this={pricingSection}
+>
   <div class="pricing-container">
     <h3>Service Menu</h3>
 
     <div class="pricing-grid">
       <div class="pricing-card" data-delay="0">
-        <div class="service-name">Holistic Consultation</div>
-        <div class="price">$75</div>
+        <div class="service-name">Natural Health Phone Consultation</div>
+        <div class="price">$75/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.1">
         <div class="service-name">Intuitive Guidance</div>
         <div class="price">$100/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.2">
-        <div class="service-name">Massage Therapy</div>
-        <div class="price">$100/hr</div>
+        <div class="service-name">Swedish Massage</div>
+        <div class="price">$85/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.3">
         <div class="service-name">Energy Therapy</div>
@@ -56,21 +60,33 @@
       </div>
       <div class="pricing-card" data-delay="0.4">
         <div class="service-name">Reflexology</div>
-        <div class="price">$75</div>
+        <div class="price">$85/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.5">
-        <div class="service-name">Raindrop</div>
-        <div class="price">$75</div>
+        <div class="service-name">Swedish Raindrop</div>
+        <div class="price">$100/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.6">
-        <div class="service-name">Reiki Healing Treatment</div>
-        <div class="price">$75/hr</div>
+        <div class="service-name">Raindrop Therapy</div>
+        <div class="price">$85/hr</div>
       </div>
       <div class="pricing-card" data-delay="0.7">
-        <div class="service-name">Access Bars</div>
-        <div class="price">$75</div>
+        <div class="service-name">Native American Reiki</div>
+        <div class="price">$85</div>
       </div>
       <div class="pricing-card" data-delay="0.8">
+        <div class="service-name">Crystal Angel Reiki</div>
+        <div class="price">$85</div>
+      </div>
+      <div class="pricing-card" data-delay="0.9">
+        <div class="service-name">Clean, Balance and Boost (BARS)</div>
+        <div class="price">$85/hr</div>
+      </div>
+      <div class="pricing-card" data-delay="1">
+        <div class="service-name">Psychic Tuning</div>
+        <div class="price">$85/hr</div>
+      </div>
+      <div class="pricing-card" data-delay="1.1">
         <div class="service-name">Bach Flower Consultation Remedy</div>
         <div class="price">$30</div>
       </div>
@@ -190,7 +206,9 @@
       <span>•</span>
       <span>Chakra Balancing</span>
       <span>•</span>
-      <span>Native America Swedish Massage</span>
+      <span>Native America</span>
+      <span>•</span>
+      <span>Swedish Massage</span>
       <span>•</span>
       <span>Lymphatic Massage</span>
       <span>•</span>
@@ -298,6 +316,15 @@
   }
   :global(.pricing-section.animate) .pricing-card[data-delay="0.8"] {
     transition-delay: 0.8s;
+  }
+  :global(.pricing-section.animate) .pricing-card[data-delay="0.9"] {
+    transition-delay: 0.9s;
+  }
+  :global(.pricing-section.animate) .pricing-card[data-delay="1"] {
+    transition-delay: 1s;
+  }
+  :global(.pricing-section.animate) .pricing-card[data-delay="1.1"] {
+    transition-delay: 1.1s;
   }
 
   .pricing-card:hover {

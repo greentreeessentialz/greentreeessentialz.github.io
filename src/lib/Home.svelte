@@ -16,6 +16,22 @@
   });
 </script>
 
+<svelte:head>
+  <!-- Preload the hero background images with high priority -->
+  <link
+    rel="preload"
+    as="image"
+    href="/imgs/landing-intro-banner.webp"
+    type="image/webp"
+  />
+  <link
+    rel="preload"
+    as="image"
+    href="/imgs/landing-intro-banner.jpg"
+    type="image/jpeg"
+  />
+</svelte:head>
+
 <!-- Hero Section with Parallax Background -->
 <section class="hero-section">
   <div class="parallax-background"></div>
@@ -83,12 +99,15 @@
     left: 0;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
-    background-image: url("/imgs/landing-intro-banner.jpg");
+    z-index: 1;
+    overflow: hidden;
+    background-image: url("/imgs/landing-intro-banner.avif"),
+      url("/imgs/landing-intro-banner.webp"),
+      url("/imgs/landing-intro-banner.jpg"); /* WebP with JPG fallback */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Creates parallax effect */
-    z-index: 1;
+    background-attachment: fixed; /* Fixed background for parallax effect */
   }
 
   .header-content {
@@ -143,7 +162,6 @@
     }
 
     .parallax-background {
-      background-attachment: scroll; /* Disable parallax on mobile for better performance */
       width: 100vw;
       height: 100vh;
     }

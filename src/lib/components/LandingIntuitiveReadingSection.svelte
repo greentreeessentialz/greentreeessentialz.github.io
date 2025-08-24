@@ -16,7 +16,7 @@
   }
 </script>
 
-<section class="intuitive-reading-section">
+<section id="intuitive-reading-section" class="intuitive-reading-section">
   <div class="parallax-background"></div>
 
   <div class="intuitive-reading-content flex-centered">
