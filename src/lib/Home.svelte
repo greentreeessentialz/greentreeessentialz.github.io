@@ -7,30 +7,64 @@
   import LandingFooter from "./components/LandingFooter.svelte";
 
   let titleVisible = false;
+  let backgroundImage = "/imgs/landing-intro-banner.jpg"; // Default fallback
 
-  onMount(() => {
+  // Fast format detection using canvas and data URLs
+  function detectImageFormatSupport() {
+    return new Promise((resolve) => {
+      // Test AVIF support first (best compression)
+      const avifTest = new Image();
+      avifTest.onload = () => resolve("avif");
+      avifTest.onerror = () => {
+        // Test WebP support
+        const webpTest = new Image();
+        webpTest.onload = () => resolve("webp");
+        webpTest.onerror = () => resolve("jpg");
+        webpTest.src =
+          "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA4AAAAvAAAAABs=";
+      };
+      avifTest.src =
+        "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABcAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB9tZGF0EgAKCBgABogQEAwgMgkfAAAAAAAABAAAAAA";
+    });
+  }
+
+  // Set background image immediately when component mounts
+  onMount(async () => {
+    // Detect format and set background immediately
+    const supportedFormat = await detectImageFormatSupport();
+    backgroundImage = `/imgs/landing-intro-banner.${supportedFormat}`;
+
+    // Apply the background image immediately
+    const parallaxElement = document.querySelector(".parallax-background");
+    if (parallaxElement) {
+      parallaxElement.style.backgroundImage = `url("${backgroundImage}")`;
+    }
+
     // Trigger title animation after a short delay
     setTimeout(() => {
       titleVisible = true;
     }, 300);
   });
-</script>
 
-<svelte:head>
-  <!-- Preload the hero background images with high priority -->
-  <link
-    rel="preload"
-    as="image"
-    href="/imgs/landing-intro-banner.webp"
-    type="image/webp"
-  />
-  <link
-    rel="preload"
-    as="image"
-    href="/imgs/landing-intro-banner.jpg"
-    type="image/jpeg"
-  />
-</svelte:head>
+  // Preload the optimal image format immediately when script loads
+  // This runs before the component mounts for maximum priority
+  (async () => {
+    const supportedFormat = await detectImageFormatSupport();
+    const optimalImage = `/imgs/landing-intro-banner.${supportedFormat}`;
+
+    // Preload the image for instant display
+    const img = new Image();
+    img.src = optimalImage;
+
+    // Set the background as soon as the image loads
+    img.onload = () => {
+      const parallaxElement = document.querySelector(".parallax-background");
+      if (parallaxElement) {
+        parallaxElement.style.backgroundImage = `url("${optimalImage}")`;
+      }
+    };
+  })();
+</script>
 
 <!-- Hero Section with Parallax Background -->
 <section class="hero-section">
@@ -64,11 +98,16 @@
         </a>
       </div>
       <div class="hint-right">
-        <img
-          src="/imgs/hint-banner.jpg"
-          alt="Wellness Services"
-          class="hint-image"
-        />
+        <picture>
+          <source srcset="/imgs/hint-banner.avif" type="image/avif" />
+          <source srcset="/imgs/hint-banner.webp" type="image/webp" />
+
+          <img
+            src="/imgs/hint-banner.jpg"
+            alt="Wellness Services"
+            class="hint-image"
+          />
+        </picture>
       </div>
     </div>
   </div>
@@ -101,13 +140,11 @@
     height: 100vh; /* Full viewport height */
     z-index: 1;
     overflow: hidden;
-    background-image: url("/imgs/landing-intro-banner.avif"),
-      url("/imgs/landing-intro-banner.webp"),
-      url("/imgs/landing-intro-banner.jpg"); /* WebP with JPG fallback */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Fixed background for parallax effect */
+    /* Background image will be set by JavaScript based on browser support */
   }
 
   .header-content {

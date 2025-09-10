@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import LandingInfoModal from "./LandingInfoModal.svelte";
 
   let isModalOpen = false;
@@ -7,6 +8,25 @@
 
   const shortText = `A sacred space for guidance, healing, and inner clarity... An intuitive reading - sometimes called a "psychic reading"- is a soulful experience that offers insight, comfort, and guidance from the unseen realms. Tracey creates a peaceful and sacred environment where each client can feel supported, seen, and gently guided on their journey. Each one-hour session is a deeply personal and thorough unfolding. Tracey draws from a wide array of intuitive tools - dowsing, astrology, mediumship, guides, and Angels - using whichever methods are called forward during the session...`;
 
+  // Format detection function (same as Home.svelte but for landing-bark images)
+  function detectImageFormatSupport() {
+    return new Promise((resolve) => {
+      // Test AVIF support first (best compression)
+      const avifTest = new Image();
+      avifTest.onload = () => resolve("avif");
+      avifTest.onerror = () => {
+        // Test WebP support
+        const webpTest = new Image();
+        webpTest.onload = () => resolve("webp");
+        webpTest.onerror = () => resolve("jpg");
+        webpTest.src =
+          "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA4AAAAvAAAAABs=";
+      };
+      avifTest.src =
+        "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABcAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB9tZGF0EgAKCBgABogQEAwgMgkfAAAAAAAABAAAAAA";
+    });
+  }
+
   function openModal() {
     isModalOpen = true;
   }
@@ -14,6 +34,21 @@
   function closeModal() {
     isModalOpen = false;
   }
+
+  // Lower priority format detection - runs when component mounts
+  onMount(async () => {
+    // Detect format and set background (lower priority than home banner)
+    const supportedFormat = await detectImageFormatSupport();
+    const optimalImage = `/imgs/landing-bark.${supportedFormat}`;
+
+    // Apply the background image
+    const parallaxElement = document.querySelector(
+      "#intuitive-reading-section .parallax-background"
+    );
+    if (parallaxElement) {
+      parallaxElement.style.backgroundImage = `url("${optimalImage}")`;
+    }
+  });
 </script>
 
 <section id="intuitive-reading-section" class="intuitive-reading-section">
@@ -22,7 +57,12 @@
   <div class="intuitive-reading-content flex-centered">
     <div class="intuitive-reading-card">
       <div class="card-image">
-        <img src="/imgs/white-owl.jpg" alt="White owl for intuitive readings" />
+        <picture>
+          <source srcset="/imgs/white-owl.avif" type="image/avif" />
+          <source srcset="/imgs/white-owl.webp" type="image/webp" />
+
+          <img src="/imgs/white-owl.jpg" alt="white owl" />
+        </picture>
       </div>
       <div class="card-content">
         <h2>Intuitive Readings with Tracey</h2>
@@ -82,12 +122,12 @@
     left: 0;
     width: 100vw; /* Full viewport width */
     height: 100%;
-    background-image: url("/imgs/landing-bark.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Creates parallax effect */
     z-index: 1;
+    /* Background image will be set by JavaScript based on browser support */
   }
 
   .intuitive-reading-content {

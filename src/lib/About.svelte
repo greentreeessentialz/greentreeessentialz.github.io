@@ -13,7 +13,7 @@
 
 <!-- Hero Section with Parallax Background -->
 <section class="hero-section">
-  <div class="parallax-background"></div>
+  <div class="parallax-about-background"></div>
 
   <!-- Header Content -->
   <div class="header-content">
@@ -62,7 +62,7 @@
     margin-top: -179px; /* Negative margin to pull up behind nav */
   }
 
-  .parallax-background {
+  .parallax-about-background {
     position: absolute;
     top: 0;
     left: 0;

@@ -16,7 +16,12 @@
 
 <footer class="footer-section">
   <div class="footer-background">
-    <img src="/imgs/footer.jpg" alt="tree under rainbow" />
+    <picture>
+      <source srcset="/imgs/footer.avif" type="image/avif" />
+      <source srcset="/imgs/footer.webp" type="image/webp" />
+
+      <img src="/imgs/footer.jpg" alt="tree under rainbow" />
+    </picture>
   </div>
 
   <div class="footer-content">
