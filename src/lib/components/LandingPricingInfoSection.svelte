@@ -87,8 +87,8 @@
         <div class="price">$85/hr</div>
       </div>
       <div class="pricing-card" data-delay="1.1">
-        <div class="service-name">Bach Flower Consultation Remedy</div>
-        <div class="price">$30</div>
+        <div class="service-name">Astrological based Coaching</div>
+        <div class="price">$100/hr</div>
       </div>
     </div>
   </div>
