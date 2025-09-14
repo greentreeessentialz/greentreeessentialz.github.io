@@ -33,6 +33,16 @@
     isMenuOpen = !isMenuOpen;
   }
 
+  // Handle service clicks - navigate to landing page sections
+  function handleServiceClick(event) {
+    event.preventDefault();
+    const href = event.currentTarget.getAttribute("href");
+    const sectionId = href.substring(1); // Remove the # symbol
+
+    // Navigate to landing page with section anchor
+    window.location.href = `/#${sectionId}`;
+  }
+
   // Handle browser back/forward buttons
   function handlePopState(event) {
     if (event.state && event.state.page) {
@@ -60,7 +70,13 @@
 <div class="global-app-container">
   <!-- Navigation positioned on top with high z-index -->
   <div class="nav-wrapper">
-    <LandingNav {currentPage} {isMenuOpen} {navigate} {toggleMenu} />
+    <LandingNav
+      {currentPage}
+      {isMenuOpen}
+      {navigate}
+      {toggleMenu}
+      handleServiceClick={currentPage !== "home" ? handleServiceClick : null}
+    />
   </div>
 
   <main>

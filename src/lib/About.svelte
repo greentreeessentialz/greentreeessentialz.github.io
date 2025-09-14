@@ -1,4 +1,8 @@
 <script>
+  import AboutCrewSection from "./components/AboutCrewSection.svelte";
+  import LandingPricingInfoSection from "./components/LandingPricingInfoSection.svelte";
+  import LandingFooter from "./components/LandingFooter.svelte";
+
   import { onMount } from "svelte";
 
   let titleVisible = false;
@@ -18,7 +22,7 @@
   <!-- Header Content -->
   <div class="header-content">
     <h1 class="hero-title" class:visible={titleVisible}>
-      About Green Tree Essentialz
+      Health and Wellness Services
     </h1>
   </div>
 </section>
@@ -27,31 +31,47 @@
   <!-- Hint Block - positioned with negative margin to overlap with hero section -->
   <div class="hint-block">
     <div class="hint-content">
-      <div class="hint-left">
-        <h2>Full Service Natural Healing Center</h2>
-        <p>
-          At Green Tree Essentialz we are a full service Natural Healing Center
-          with full protocols and plenty of support to help you meet your goals.
-        </p>
-        <p>
-          Our store currently offers: New Age and Metaphysical Items, Essential
-          Oils, incense, candles, burners, Stones and crystals, books,
-          pendulums, Tarot and Oracle Cards, etc!
-        </p>
+      <div class="hint-image">
+        <img src="/imgs/wolf.jpg" alt="white wolf" />
+      </div>
+      <div class="hint-text-content">
+        <div class="hint-paragraphs">
+          <p>
+            Green Tree Essentialz is a New Age metaphysical Business with Store
+            fronts in 2 locations. Flushing, Mi and Charlotte, MI. 3 Natural
+            Health Clinics. Bad Axe, Flushing, Saginaw and Charlotte, Mi.
+          </p>
+          <p>
+            You can schedule Natural Health Consultations, Psychic readings,
+            events, and Energy Body Healing Sessions, classes and more! Tracey
+            is an Angel Oracle Reader, Psychic Medium, Certified Deeksha, Reiki
+            Master and Ordained Minister.
+          </p>
+          <p>
+            We have a number of readers who specialize in many mediums of
+            Psychic divinations. Also Many Healers who use several different
+            modalities. Green Tree Essentialz Currently offers : New Age and
+            Metaphysical Items, Essential Oils, incense, candles, burners,
+            Stones and crystals, books, pendulums, Tarot and Oracle Cards, etc!
+          </p>
+          <p>
+            Join us For Fairs, Classes, Workshops, Meditations and Drumming!
+            Stay tuned for new classes and new items coming in weekly!!
+          </p>
+        </div>
         <a href="/" class="hint-about-us-link">
           Back to Home <i class="fas fa-arrow-right"></i>
         </a>
       </div>
-      <div class="hint-right">
-        <img
-          src="/imgs/hint-banner.jpg"
-          alt="Wellness Services"
-          class="hint-image"
-        />
-      </div>
     </div>
   </div>
 </section>
+
+<AboutCrewSection />
+
+<LandingPricingInfoSection />
+
+<LandingFooter />
 
 <style>
   /* Hero Section Styles */
@@ -68,7 +88,7 @@
     left: 0;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
-    background-image: url("/imgs/about.jpg");
+    background-image: url("/imgs/about-banner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -107,6 +127,7 @@
     width: 100%;
     max-width: calc(100% - 5rem); /* Match nav margins (2.5rem on each side) */
     overflow: visible; /* Ensure text is not clipped */
+    text-shadow: 2px 2px #000;
   }
 
   .hero-title.visible {
@@ -127,7 +148,7 @@
       margin-top: -150px; /* Slightly less negative margin on mobile */
     }
 
-    .parallax-background {
+    .parallax-about-background {
       background-attachment: scroll; /* Disable parallax on mobile for better performance */
       width: 100vw;
       height: 100vh;
@@ -158,39 +179,54 @@
     z-index: 10;
     display: flex;
     justify-content: center;
+    padding: 0 1rem;
   }
 
   .hint-content {
     background-color: white;
-    border-radius: 1.5rem;
-    padding: 1rem;
+    border-radius: 10px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    max-width: 1024px;
-    width: calc(100% - 5rem); /* Match nav margins */
+    width: 1000px;
+    max-width: calc(100% - 5rem);
     display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
-  .hint-content h2 {
-    font-size: 1.75rem;
-    font-family: "DM Serif Display";
-    color: #53570e;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-  }
-  .hint-left {
-    flex: 1;
-    text-align: left;
+    margin: 0;
+    position: relative;
+    z-index: 100;
+    overflow: hidden;
   }
 
-  .hint-left p {
+  .hint-image {
+    flex-shrink: 0;
+  }
+
+  .hint-image img {
+    height: 600px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  .hint-text-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hint-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hint-paragraphs p {
     color: #53570e;
     font-size: 1.1rem;
     font-weight: 400;
-    margin-bottom: 1rem;
+    margin: 0;
     line-height: 1.6;
   }
+
   .hint-about-us-link {
     background-color: #53570e;
     color: #fff5b6;
@@ -222,25 +258,110 @@
     transform: translateX(3px);
   }
 
-  .hint-right {
-    flex-shrink: 0;
-  }
-
-  .hint-image {
-    width: 100%;
-    max-width: 470px;
-    height: auto;
-    border-radius: 0.75rem; /* 12px converted to rem */
-    object-fit: cover;
-  }
-
+  /* Responsive Design */
   @media (max-width: 1130px) {
-    .hint-content h2 {
+    .hint-block {
+      margin-top: -80px;
+    }
+
+    .hint-content {
+      width: 900px;
+      max-width: calc(100% - 3rem);
+    }
+
+    .hint-text-content h2 {
       font-size: 1.25rem;
       letter-spacing: 0.5px;
     }
-    .hint-left p {
+
+    .hint-paragraphs p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .hint-block {
+      margin-top: -70px;
+    }
+
+    .hint-content {
+      flex-direction: column;
+      width: 800px;
+      max-width: calc(100% - 2rem);
+    }
+
+    .hint-image img {
+      height: auto;
+      width: 100%;
+      max-height: 500px;
+      border-radius: 10px 10px 0 0;
+      object-position: 0 -100px;
+    }
+
+    .hint-text-content {
+      padding: 1.5rem;
+      gap: 1.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hint-block {
+      margin-top: -60px;
+      padding: 1.5rem 1rem;
+    }
+
+    .hint-content {
+      width: 100%;
+      max-width: none;
+    }
+
+    /* .hint-image img {
+      max-height: 350px;
+      object-position: top;
+    } */
+
+    .hint-text-content {
+      padding: 1.5rem;
+      gap: 1.2rem;
+    }
+
+    .hint-text-content h2 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .hint-paragraphs p {
       font-size: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hint-block {
+      margin-top: -50px;
+      padding: 1rem 0.5rem;
+    }
+
+    .hint-content {
+      width: 100%;
+    }
+
+    .hint-image img {
+      max-height: 410px;
+      object-position: top;
+    }
+
+    .hint-text-content {
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .hint-text-content h2 {
+      font-size: 1.25rem;
+    }
+
+    .hint-paragraphs p {
+      font-size: 0.9rem;
     }
   }
 
@@ -257,44 +378,6 @@
     }
     60% {
       transform: translateY(-5px);
-    }
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .hint-block {
-      margin-top: -80px;
-    }
-
-    .hint-content {
-      width: calc(100% - 2rem);
-      padding: 1.5rem;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .hint-left p {
-      font-size: 1rem;
-    }
-
-    .hint-image {
-      max-width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hint-block {
-      margin-top: -60px;
-    }
-
-    .hint-content {
-      width: calc(100% - 1rem);
-      padding: 1rem;
-      gap: 1rem;
-    }
-
-    .hint-left p {
-      font-size: 0.9rem;
     }
   }
 

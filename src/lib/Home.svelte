@@ -7,63 +7,66 @@
   import LandingFooter from "./components/LandingFooter.svelte";
 
   let titleVisible = false;
-  let backgroundImage = "/imgs/landing-intro-banner.jpg"; // Default fallback
 
-  // Fast format detection using canvas and data URLs
-  function detectImageFormatSupport() {
-    return new Promise((resolve) => {
-      // Test AVIF support first (best compression)
-      const avifTest = new Image();
-      avifTest.onload = () => resolve("avif");
-      avifTest.onerror = () => {
-        // Test WebP support
-        const webpTest = new Image();
-        webpTest.onload = () => resolve("webp");
-        webpTest.onerror = () => resolve("jpg");
-        webpTest.src =
-          "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA4AAAAvAAAAABs=";
-      };
-      avifTest.src =
-        "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABcAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB9tZGF0EgAKCBgABogQEAwgMgkfAAAAAAAABAAAAAA";
-    });
-  }
-
-  // Set background image immediately when component mounts
-  onMount(async () => {
-    // Detect format and set background immediately
-    const supportedFormat = await detectImageFormatSupport();
-    backgroundImage = `/imgs/landing-intro-banner.${supportedFormat}`;
-
-    // Apply the background image immediately
-    const parallaxElement = document.querySelector(".parallax-background");
-    if (parallaxElement) {
-      parallaxElement.style.backgroundImage = `url("${backgroundImage}")`;
-    }
-
+  onMount(() => {
     // Trigger title animation after a short delay
     setTimeout(() => {
       titleVisible = true;
     }, 300);
-  });
 
-  // Preload the optimal image format immediately when script loads
-  // This runs before the component mounts for maximum priority
-  (async () => {
-    const supportedFormat = await detectImageFormatSupport();
-    const optimalImage = `/imgs/landing-intro-banner.${supportedFormat}`;
+    // Handle hash navigation from other pages
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const sectionId = hash.substring(1); // Remove the # symbol
+        console.log("Hash navigation triggered for:", sectionId);
 
-    // Preload the image for instant display
-    const img = new Image();
-    img.src = optimalImage;
+        // Try to find the section with retries
+        const findAndScrollToSection = (retries = 0) => {
+          const section = document.getElementById(sectionId);
+          console.log(
+            "Looking for section:",
+            sectionId,
+            "Found:",
+            !!section,
+            "Retry:",
+            retries
+          );
 
-    // Set the background as soon as the image loads
-    img.onload = () => {
-      const parallaxElement = document.querySelector(".parallax-background");
-      if (parallaxElement) {
-        parallaxElement.style.backgroundImage = `url("${optimalImage}")`;
+          if (section) {
+            section.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            console.log("Successfully scrolled to section:", sectionId);
+          } else if (retries < 10) {
+            // Retry up to 10 times with increasing delays
+            setTimeout(
+              () => {
+                findAndScrollToSection(retries + 1);
+              },
+              200 * (retries + 1)
+            );
+          } else {
+            console.log("Could not find section after retries:", sectionId);
+          }
+        };
+
+        findAndScrollToSection();
       }
     };
-  })();
+
+    // Check for hash on page load
+    handleHashNavigation();
+
+    // Listen for hash changes (in case user navigates with browser back/forward)
+    window.addEventListener("hashchange", handleHashNavigation);
+
+    // Cleanup listener on component destroy
+    return () => {
+      window.removeEventListener("hashchange", handleHashNavigation);
+    };
+  });
 </script>
 
 <!-- Hero Section with Parallax Background -->
@@ -140,11 +143,11 @@
     height: 100vh; /* Full viewport height */
     z-index: 1;
     overflow: hidden;
+    background-image: url("/imgs/landing-intro-banner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Fixed background for parallax effect */
-    /* Background image will be set by JavaScript based on browser support */
   }
 
   .header-content {

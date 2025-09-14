@@ -1,15 +1,48 @@
 <script>
-  // Smooth scroll function for service links
+  // Handle service clicks - smooth scroll on landing, navigate on other pages
   function handleServiceClick(event) {
+    event.preventDefault();
+    console.log("Service click handler triggered");
     const href = event.currentTarget.getAttribute("href");
     const sectionId = href.substring(1); // Remove the # symbol
-    const section = document.getElementById(sectionId);
+    console.log("Section ID:", sectionId);
 
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    // Check if we're on the landing page by looking for a unique landing page element
+    const healthServicesSection = document.getElementById(
+      "health-services-section"
+    );
+    const isLandingPage = !!healthServicesSection;
+    console.log("Is landing page:", isLandingPage);
+
+    // Check if we're on the about page by looking for the pricing section
+    const pricingSection = document.getElementById("pricing-info-section");
+    const isAboutPage = !!pricingSection && !isLandingPage;
+    console.log("Is about page:", isAboutPage);
+
+    if (isLandingPage) {
+      // On landing page, smooth scroll to section
+      const section = document.getElementById(sectionId);
+      console.log("Section found:", !!section);
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    } else if (isAboutPage && sectionId === "pricing-info-section") {
+      // On about page, scroll to pricing section
+      console.log("Scrolling to pricing section on about page");
+      if (pricingSection) {
+        pricingSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    } else {
+      // On other pages, navigate to landing page with section anchor
+      console.log("Navigating to:", `/#${sectionId}`);
+      console.log("Current URL before navigation:", window.location.href);
+      window.location.href = `/#${sectionId}`;
     }
   }
 </script>
@@ -70,12 +103,11 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about">About Us</a></li>
           <li>
-            <a href="http://greentreeessentialz.com/index.php/contact-us/"
-              >Contact Us</a
-            >
+            <a href="/contact-us">Contact Us</a>
           </li>
           <li>
-            <a href="http://greentreeessentialz.com/index.php/events-classes/"
+            <a
+              href="https://www.facebook.com/pg/GreenTreeEssentialz/events/?ref=page_internal"
               >Events & Classes</a
             >
           </li>
@@ -87,28 +119,23 @@
         <h3>Our Services</h3>
         <ul class="footer-links">
           <li>
-            <a
-              href="#spiritual-services-section"
-              on:click|preventDefault={handleServiceClick}>Spiritual Services</a
+            <a href="#spiritual-services-section" on:click={handleServiceClick}
+              >Spiritual Services</a
             >
           </li>
           <li>
-            <a
-              href="#health-services-section"
-              on:click|preventDefault={handleServiceClick}
+            <a href="#health-services-section" on:click={handleServiceClick}
               >Natural Health Services</a
             >
           </li>
           <li>
-            <a
-              href="#intuitive-reading-section"
-              on:click|preventDefault={handleServiceClick}>Intuitive Readings</a
+            <a href="#intuitive-reading-section" on:click={handleServiceClick}
+              >Intuitive Readings</a
             >
           </li>
           <li>
-            <a
-              href="#pricing-info-section"
-              on:click|preventDefault={handleServiceClick}>Pricing & Packages</a
+            <a href="#pricing-info-section" on:click={handleServiceClick}
+              >Pricing & Packages</a
             >
           </li>
         </ul>

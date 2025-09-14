@@ -4,6 +4,7 @@
   export let isMenuOpen = false;
   export let navigate = (page) => {};
   export let toggleMenu = () => {};
+  export let handleServiceClick = null;
 
   function handleNavClick(event, page) {
     event.preventDefault();
@@ -39,8 +40,16 @@
   }
 
   // Handle service navigation clicks
-  function handleServiceClick(event, sectionId, closeMenu = false) {
+  function handleServiceClickInternal(event, sectionId, closeMenu = false) {
     event.preventDefault();
+
+    // If a custom handler is provided, use it
+    if (handleServiceClick) {
+      handleServiceClick(event);
+      return;
+    }
+
+    // Otherwise use default smooth scroll behavior
     smoothScrollToSection(sectionId, closeMenu);
   }
 </script>
@@ -76,34 +85,34 @@
         >
       </li>
       <li>
-        <a href="http://greentreeessentialz.com/index.php/contact-us/"
-          >Contact Us</a
-        >
+        <a href="/">Contact Us</a>
       </li>
     </ul>
   </div>
 
   <nav class="global-app-nav">
     <div class="nav-left">
-      <picture>
-        <source
-          srcset="/imgs/greentree-logo.webp 1080w, /imgs/greentree-logo.webp 1024w, /imgs/greentree-logo.webp 768w, /imgs/greentree-logo.webp 510w, /imgs/greentree-logo.webp 300w"
-          sizes="(max-width: 1080px) 100vw, 1080px"
-          type="image/webp"
-        />
-        <img
-          src="/imgs/greentree-logo.png"
-          alt="Green Tree Essentialz Logo"
-          class="logo"
-          width="1080"
-          height="360"
-          srcset="/imgs/greentree-logo.png 1080w, /imgs/greentree-logo.png 768w, /imgs/greentree-logo.png 510w, /imgs/greentree-logo.png 300w"
-          sizes="(max-width: 1080px) 100vw, 1080px"
-          decoding="async"
-          fetchpriority="high"
-          data-recalc-dims="1"
-        />
-      </picture>
+      <a href="/" on:click={(e) => handleNavClick(e, "home")} class="logo-link">
+        <picture>
+          <source
+            srcset="/imgs/greentree-logo.webp 1080w, /imgs/greentree-logo.webp 1024w, /imgs/greentree-logo.webp 768w, /imgs/greentree-logo.webp 510w, /imgs/greentree-logo.webp 300w"
+            sizes="(max-width: 1080px) 100vw, 1080px"
+            type="image/webp"
+          />
+          <img
+            src="/imgs/greentree-logo.png"
+            alt="Green Tree Essentialz Logo"
+            class="logo"
+            width="1080"
+            height="360"
+            srcset="/imgs/greentree-logo.png 1080w, /imgs/greentree-logo.png 768w, /imgs/greentree-logo.png 510w, /imgs/greentree-logo.png 300w"
+            sizes="(max-width: 1080px) 100vw, 1080px"
+            decoding="async"
+            fetchpriority="high"
+            data-recalc-dims="1"
+          />
+        </picture>
+      </a>
     </div>
 
     <div class="nav-center">
@@ -112,14 +121,15 @@
           <a
             href="#spiritual-services-section"
             on:click={(e) =>
-              handleServiceClick(e, "spiritual-services-section")}
+              handleServiceClickInternal(e, "spiritual-services-section")}
             >Spiritual Services</a
           >
         </li>
         <li>
           <a
             href="#health-services-section"
-            on:click={(e) => handleServiceClick(e, "health-services-section")}
+            on:click={(e) =>
+              handleServiceClickInternal(e, "health-services-section")}
             >Natural Health Services</a
           >
         </li>
@@ -184,10 +194,7 @@
             >
           </li>
           <li>
-            <a
-              href="http://greentreeessentialz.com/index.php/contact-us/"
-              on:click={() => toggleMenu()}>Contact Us</a
-            >
+            <a href="/" on:click={() => toggleMenu()}>Contact Us</a>
           </li>
         </ul>
       </div>
@@ -198,15 +205,18 @@
             <a
               href="#spiritual-services-section"
               on:click={(e) =>
-                handleServiceClick(e, "spiritual-services-section", true)}
-              >Spiritual Services</a
+                handleServiceClickInternal(
+                  e,
+                  "spiritual-services-section",
+                  true
+                )}>Spiritual Services</a
             >
           </li>
           <li>
             <a
               href="#health-services-section"
               on:click={(e) =>
-                handleServiceClick(e, "health-services-section", true)}
+                handleServiceClickInternal(e, "health-services-section", true)}
               >Natural Health Services</a
             >
           </li>
@@ -369,6 +379,25 @@
 
   .desktop-menu a:hover::after {
     width: 100%;
+  }
+
+  .logo-link {
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+  }
+
+  .logo-link:hover {
+    text-decoration: none;
+    background: none;
+    border: none;
+  }
+
+  .logo-link:focus {
+    outline: none;
   }
 
   .logo {
