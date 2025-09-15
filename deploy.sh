@@ -50,6 +50,7 @@ if [ $? -eq 0 ]; then
     
     echo "🎉 Deployment complete!"
     echo "📝 Your site will be available at: https://greentreeessentialz.github.io"
+    echo "🌐 Custom domain should also work if properly configured in GitHub Pages settings"
     echo "💡 Development environment is restored and ready for hot reload!"
     
 else

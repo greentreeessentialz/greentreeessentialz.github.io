@@ -23,7 +23,7 @@ export default defineConfig({
     target: "esnext",
     modulePreload: false,
   },
-  base: "/",
+  base: "./",
   optimizeDeps: {
     include: ["svelte"],
   },
