@@ -14,20 +14,46 @@
     // Detect if device is a tablet (iPad, Android tablet, etc.)
     const detectTablet = () => {
       const userAgent = navigator.userAgent.toLowerCase();
+
+      // iPad detection (including iPad Pro in desktop mode)
       const isIPad =
         /ipad/.test(userAgent) ||
         (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      // Android tablet detection
       const isAndroidTablet =
         /android/.test(userAgent) && !/mobile/.test(userAgent);
-      const isTabletSize =
-        window.innerWidth >= 768 && window.innerWidth <= 1024;
+
+      // iOS devices (iPhone, iPad, iPod)
       const isIOS =
         /iphone|ipad|ipod/.test(userAgent) ||
         (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-      // For iOS devices, always use the transform-based parallax
-      // For other tablets, use size-based detection
-      return isIPad || isAndroidTablet || isTabletSize || isIOS;
+      // Windows tablets (Surface, etc.)
+      const isWindowsTablet =
+        /windows/.test(userAgent) && navigator.maxTouchPoints > 1;
+
+      // Check for touch capability and screen size
+      const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      const isTabletSize =
+        window.innerWidth >= 768 && window.innerWidth <= 1366;
+
+      // Check if background-attachment: fixed is supported
+      const supportsFixedAttachment = (() => {
+        const testEl = document.createElement("div");
+        testEl.style.backgroundAttachment = "fixed";
+        return testEl.style.backgroundAttachment === "fixed";
+      })();
+
+      // Use transform-based parallax for devices that don't support fixed attachment well
+      // or are known to have issues with it
+      return (
+        isIPad ||
+        isAndroidTablet ||
+        isIOS ||
+        isWindowsTablet ||
+        (hasTouch && isTabletSize && !supportsFixedAttachment)
+      );
     };
 
     isTablet = detectTablet();
@@ -155,13 +181,6 @@
     will-change: transform; /* Optimize for transform animations */
     transform: translateZ(0); /* Force hardware acceleration */
     backface-visibility: hidden; /* Improve rendering performance */
-  }
-
-  /* Additional tablet optimizations */
-  @media (max-width: 1024px) and (min-width: 768px) {
-    .parallax-about-background {
-      background-attachment: scroll; /* Fallback for all tablets */
-    }
   }
 
   .header-content {
