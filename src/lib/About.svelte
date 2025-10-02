@@ -6,18 +6,71 @@
   import { onMount } from "svelte";
 
   let titleVisible = false;
+  let isTablet = false;
+  let parallaxOffset = 0;
+  let parallaxElement;
 
   onMount(() => {
+    // Detect if device is a tablet (iPad, Android tablet, etc.)
+    const detectTablet = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isIPad =
+        /ipad/.test(userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const isAndroidTablet =
+        /android/.test(userAgent) && !/mobile/.test(userAgent);
+      const isTabletSize =
+        window.innerWidth >= 768 && window.innerWidth <= 1024;
+      const isIOS =
+        /iphone|ipad|ipod/.test(userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      // For iOS devices, always use the transform-based parallax
+      // For other tablets, use size-based detection
+      return isIPad || isAndroidTablet || isTabletSize || isIOS;
+    };
+
+    isTablet = detectTablet();
+
     // Trigger title animation after a short delay
     setTimeout(() => {
       titleVisible = true;
     }, 300);
+
+    // Add scroll listener for tablet parallax effect
+    if (isTablet) {
+      let ticking = false;
+
+      const handleScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.5; // Adjust this value to control parallax speed
+            parallaxOffset = scrolled * parallaxSpeed;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      // Cleanup listeners on component destroy
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   });
 </script>
 
 <!-- Hero Section with Parallax Background -->
 <section class="hero-section">
-  <div class="parallax-about-background"></div>
+  <div
+    class="parallax-about-background"
+    class:tablet-parallax={isTablet}
+    bind:this={parallaxElement}
+    style:transform={isTablet ? `translateY(${parallaxOffset}px)` : ""}
+  ></div>
 
   <!-- Header Content -->
   <div class="header-content">
@@ -96,6 +149,21 @@
     z-index: 1;
   }
 
+  /* Tablet-specific parallax styles */
+  .parallax-about-background.tablet-parallax {
+    background-attachment: scroll; /* Use scroll instead of fixed for tablets */
+    will-change: transform; /* Optimize for transform animations */
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden; /* Improve rendering performance */
+  }
+
+  /* Additional tablet optimizations */
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .parallax-about-background {
+      background-attachment: scroll; /* Fallback for all tablets */
+    }
+  }
+
   .header-content {
     position: absolute;
     top: 0;
@@ -170,6 +238,7 @@
       font-size: 2rem; /* Fixed font size for mobile */
       white-space: normal; /* Allow text to wrap */
       line-height: 1.2; /* Better line height for wrapped text */
+      text-shadow: 1px 1px #000; /* Add text shadow for mobile phones */
     }
   }
 

@@ -7,8 +7,32 @@
   import LandingFooter from "./components/LandingFooter.svelte";
 
   let titleVisible = false;
+  let isTablet = false;
+  let parallaxOffset = 0;
+  let parallaxElement;
 
   onMount(() => {
+    // Detect if device is a tablet (iPad, Android tablet, etc.)
+    const detectTablet = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isIPad =
+        /ipad/.test(userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const isAndroidTablet =
+        /android/.test(userAgent) && !/mobile/.test(userAgent);
+      const isTabletSize =
+        window.innerWidth >= 768 && window.innerWidth <= 1024;
+      const isIOS =
+        /iphone|ipad|ipod/.test(userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      // For iOS devices, always use the transform-based parallax
+      // For other tablets, use size-based detection
+      return isIPad || isAndroidTablet || isTabletSize || isIOS;
+    };
+
+    isTablet = detectTablet();
+
     // Trigger title animation after a short delay
     setTimeout(() => {
       titleVisible = true;
@@ -62,16 +86,46 @@
     // Listen for hash changes (in case user navigates with browser back/forward)
     window.addEventListener("hashchange", handleHashNavigation);
 
-    // Cleanup listener on component destroy
-    return () => {
-      window.removeEventListener("hashchange", handleHashNavigation);
-    };
+    // Add scroll listener for tablet parallax effect
+    if (isTablet) {
+      let ticking = false;
+
+      const handleScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.5; // Adjust this value to control parallax speed
+            parallaxOffset = scrolled * parallaxSpeed;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      // Cleanup listeners on component destroy
+      return () => {
+        window.removeEventListener("hashchange", handleHashNavigation);
+        window.removeEventListener("scroll", handleScroll);
+      };
+    } else {
+      // Cleanup listener on component destroy
+      return () => {
+        window.removeEventListener("hashchange", handleHashNavigation);
+      };
+    }
   });
 </script>
 
 <!-- Hero Section with Parallax Background -->
 <section class="hero-section">
-  <div class="parallax-background"></div>
+  <div
+    class="parallax-background"
+    class:tablet-parallax={isTablet}
+    bind:this={parallaxElement}
+    style:transform={isTablet ? `translateY(${parallaxOffset}px)` : ""}
+  ></div>
 
   <!-- Header Content -->
   <div class="header-content">
@@ -148,6 +202,21 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Fixed background for parallax effect */
+  }
+
+  /* Tablet-specific parallax styles */
+  .parallax-background.tablet-parallax {
+    background-attachment: scroll; /* Use scroll instead of fixed for tablets */
+    will-change: transform; /* Optimize for transform animations */
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden; /* Improve rendering performance */
+  }
+
+  /* Additional tablet optimizations */
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .parallax-background {
+      background-attachment: scroll; /* Fallback for all tablets */
+    }
   }
 
   .header-content {
